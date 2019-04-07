@@ -11,7 +11,7 @@ cacheGroups is where we define rules for how Webpack should group chunks into ou
 
 https://webpack.js.org/plugins/split-chunks-plugin/
 https://github.com/webpack-contrib/mini-css-extract-plugin
-
+https://www.npmjs.com/package/size-limit  In Progress
 --------------------------------------------------------------------------------
 
 #Issues facing while implmenting Webpack
