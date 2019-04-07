@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const htmlPlugin  = new HtmlWebpackPlugin({
   template: './src/index.html',
@@ -20,7 +21,7 @@ module.exports = {
   devtool: "source-map",
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: ['.js', '.jsx', '.css', '.scss'],
     mainFields: ['browser', 'module', 'main', 'jsnext:main'],
   },
   optimization : {
@@ -33,6 +34,17 @@ module.exports = {
   module: {
     rules : [
       {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
+        ]
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: [{
@@ -42,15 +54,13 @@ module.exports = {
      {
       test:/\.css$/,
       use:[
-        {
-          loader : 'style-loader'
-        },
+        MiniCssExtractPlugin.loader,
         {
           loader: 'css-loader',
           options: {
             modules: true
           }
-        }
+        },
       ],
      }
     ]
@@ -62,5 +72,9 @@ module.exports = {
     htmlPlugin,
     new webpack.HotModuleReplacementPlugin(),
     new BundleAnalyzerPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
   ]
 }
