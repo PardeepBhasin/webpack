@@ -7,6 +7,11 @@ cacheGroups is where we define rules for how Webpack should group chunks into ou
 
 2.) mini-css-extract-plugin : This plugin extracts CSS into separate files. It creates a CSS file per JS file which contains CSS. It supports On-Demand-Loading of CSS and SourceMaps.
 
+# Reference Sites for implementation:
+
+https://webpack.js.org/plugins/split-chunks-plugin/
+https://github.com/webpack-contrib/mini-css-extract-plugin
+
 --------------------------------------------------------------------------------
 
 #Issues facing while implmenting Webpack
