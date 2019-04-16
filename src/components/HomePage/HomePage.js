@@ -9,7 +9,7 @@ class HomePage extends React.Component {
 
   render () {
     return (
-      <div  className={styles.linkText} >Pardeep Bhasins <img src={img}/></div>
+      <div  className={styles.linkText} >Test</div>
     );
   }
 }

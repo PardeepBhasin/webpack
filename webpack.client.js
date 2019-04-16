@@ -3,12 +3,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const merge = require('webpack-merge');
+const baseConfig = require('./webpack.base');
+const parts = require('./webpack.parts');
 
 const htmlPlugin  = new HtmlWebpackPlugin({
   template: './src/index.html',
   filename: './index.html'
 })
-module.exports = {
+
+const config = {
   mode: 'development',
   entry: {
     app: './src/index.js'
@@ -44,13 +48,6 @@ module.exports = {
           }
         ]
       },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader',
-        }]
-      },
      {
       test:/\.css$/,
       use:[
@@ -78,3 +75,12 @@ module.exports = {
     })
   ]
 }
+
+module.exports = merge([
+  baseConfig,
+  config,
+  parts.loadFonts({
+    outPath: 'assets/fonts/',
+    publicPath: 'public',
+  })
+]);
